@@ -63,5 +63,76 @@ class Solution:
 sol=Solution()
 print(sol.validPalindrome("abca"))
         
-        
-        
+  
+"""
+
+                                    #dry run with complexity 
+
+
+✅ Input
+s = "abca"
+🚀 Initial Setup
+left = 0
+right = 3   # len("abca") - 1
+
+String indexing:
+
+Index:   0   1   2   3
+Chars:   a   b   c   a
+🔁 Main Loop Dry Run
+👉 Step 1:
+s[left] == s[right]
+s[0] == s[3] → 'a' == 'a' ✅
+
+👉 Move inward:
+
+left = 1
+right = 2
+👉 Step 2:
+s[1] != s[2] → 'b' != 'c' ❌
+
+💥 Mismatch found!
+
+🔥 Now the KEY LOGIC
+return isPalindromeRange(s, left+1, right) OR isPalindromeRange(s, left, right-1)
+
+👉 Two possibilities:
+
+Skip left character (b)
+Skip right character (c)
+✂️ Case 1: Skip left (b)
+isPalindromeRange(s, 2, 2)
+
+Check substring:
+
+"c"
+Dry run:
+left = 2, right = 2
+while left < right → False
+
+👉 Return:
+
+True ✅
+✂️ Case 2: Skip right (c)
+isPalindromeRange(s, 1, 1)
+
+Check substring:
+
+"b"
+Dry run:
+left = 1, right = 1
+while left < right → False
+
+👉 Return:
+
+True ✅
+✅ Final Decision
+True OR True → True
+🎉 Final Output
+True
+
+⏱ Complexity
+Time: O(n)
+Space: O(1)   
+
+"""  
