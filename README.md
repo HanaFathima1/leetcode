@@ -3,16 +3,16 @@
 Welcome to my LeetCode Solutions repository!  
 This repository showcases my consistent practice and structured approach to mastering Data Structures and Algorithms using Python.
 
-I am actively preparing for technical interviews (FAANG / IBM) and solving problems daily to strengthen problem-solving skills.
+I am actively preparing for technical interviews and solving problems daily to strengthen problem-solving skills.
 
 ---
 
 ## 👨‍💻 About Me
 
 - 🎓 AIML Engineering Student
-- 💻 Passionate about Problem Solving & Backend Development
+- 💻 Passionate about DSA & Problem Solving 
 - 🐍 Primary Language: Python
-- 🎯 Goal: Crack top tech company interviews (IBM / FAANG)
+- 🎯 Goal: Crack top tech company interviews
 
 ---
 
@@ -37,7 +37,7 @@ I am actively preparing for technical interviews (FAANG / IBM) and solving probl
 
 ---
 
-## 📂 Repository Structure
+<!-- ## 📂 Repository Structure
 
 leetcode-solutions/
 │
@@ -52,9 +52,9 @@ leetcode-solutions/
 
 Each folder contains categorized solutions for better readability and navigation.
 
----
+--- -->
 
-## 📝 Solution Approach
+<!-- ## 📝 Solution Approach
 
 Each problem solution includes:
 
@@ -65,7 +65,7 @@ Each problem solution includes:
 - 📦 Space Complexity Analysis
 - 🧪 Clean & Readable Python Code
 
----
+--- -->
 
 ## 📊 Progress Tracker
 
