@@ -98,3 +98,22 @@ class Solution:
 TC => O(n)
 SC => O(n)
 """
+
+
+        #or (using twoPointers)
+        
+def containsDuplicates(nums: list[int]) -> bool:
+    nums.sort()  
+    
+    for i in range(len(nums) - 1):
+        if nums[i] == nums[i + 1]:
+            return True
+    return False
+
+print(containsDuplicates([1,2,3,4]))   
+print(containsDuplicates([1,2,3,1]))   
+
+"""    
+TC => O(n log n)
+SC => O(1)
+"""
