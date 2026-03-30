@@ -10,6 +10,7 @@ Topics
 Array
 Hash Table
 Sorting
+
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
  
@@ -59,7 +60,7 @@ Acceptance Rate
 """
 
 class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
+    def containsDuplicate(self, nums: list[int]) -> bool:
         res=[]
         for num in nums:
             if num in res:
@@ -67,14 +68,33 @@ class Solution:
             res.append(num)
         return False
 
+"""
+TC => O(n²)
+SC => O(n)
+"""
 
-        # #or
+        #or
+class Solution:
+    def containsDuplicate(self, nums: list[int]) -> bool:
         s=set()
         for num in nums:
             if num in s:
                 return True
             s.add(num)
         return False
+    
+"""    
+TC => O(n)
+SC => O(n)
+"""
 
         #or
+
+class Solution:
+    def containsDuplicate(self, nums: list[int]) -> bool:
         return len(nums)!=len(set(nums))
+    
+"""    
+TC => O(n)
+SC => O(n)
+"""
