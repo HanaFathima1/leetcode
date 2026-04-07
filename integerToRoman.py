@@ -105,3 +105,27 @@ def intToRoman(num):
     return result
 
 print(intToRoman(1994))
+
+
+"""
+
+Time Complexity:
+O(1)
+
+Explanation:
+roman_map has 13 fixed elements → constant size
+The for loop runs 13 times → O(1)
+Inner while loop:
+Each iteration reduces num
+Worst case: number like num = 3888
+
+You can also say:
+O(k)
+Where:
+k = number of symbols in output
+Maximum is small → constant
+
+
+Space Complexity = O(1)
+
+"""
