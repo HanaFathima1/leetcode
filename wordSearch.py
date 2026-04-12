@@ -325,4 +325,72 @@ The successful path:
    ↓
 (2,1) D
 
-"""             
+"""            
+
+
+#SOLUTION USING TRIE DATA STRUCTURE
+
+class TrieNode:
+    def __init__(self):
+        # Store children nodes
+        self.children = {}
+        
+        # Store complete word (optimization)
+        self.word = None
+
+
+class Solution:
+    def findWords(self, board, words):
+        
+        # 🔹 Step 1: Build Trie
+        root = TrieNode()
+        
+        for word in words:
+            node = root
+            for ch in word:
+                if ch not in node.children:
+                    node.children[ch] = TrieNode()
+                node = node.children[ch]
+            
+            # Store full word at end node
+            node.word = word
+        
+        # 🔹 Step 2: DFS on board
+        rows, cols = len(board), len(board[0])
+        result = []
+
+        def dfs(r, c, node):
+            ch = board[r][c]
+            
+            # If character not in Trie → stop
+            if ch not in node.children:
+                return
+            
+            next_node = node.children[ch]
+            
+            # If word found
+            if next_node.word:
+                result.append(next_node.word)
+                
+                # Avoid duplicates
+                next_node.word = None
+            
+            # Mark visited
+            board[r][c] = "#"
+            
+            # Explore 4 directions
+            for dr, dc in [(0,1),(1,0),(0,-1),(-1,0)]:
+                nr, nc = r + dr, c + dc
+                
+                if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] != "#":
+                    dfs(nr, nc, next_node)
+            
+            # Backtrack (restore)
+            board[r][c] = ch
+
+        # 🔹 Step 3: Start DFS from every cell
+        for i in range(rows):
+            for j in range(cols):
+                dfs(i, j, root)
+
+        return result 
