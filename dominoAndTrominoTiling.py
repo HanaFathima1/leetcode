@@ -45,6 +45,14 @@ Acceptance Rate
 51.3%
 
 """
+#-----------------------------------------------------------------------#
+"""
+
+LeetCode 790 asks:
+
+How many different ways can you completely fill a 2 × n rectangle using 2 × 1 dominoes and L-shaped trominoes without leaving any empty spaces?
+
+"""
 
 class Solution:
     def numTilings(selff, n:int) -> int:
