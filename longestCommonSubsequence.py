@@ -57,6 +57,9 @@ DP[i][j] = DP[i - 1][j - 1] + 1 , if text1[i] == text2[j] DP[i][j] = max(DP[i - 
 
 """
 
+#Reference: https://youtu.be/Ua0GhsJSlWM?si=svn8KTPKGwAcHQ9J
+#           https://youtu.be/4ClOkX0SWW4?si=q0vE6lb_D6M-zK-n
+
 #-------------------------------CODE1------------------------------------
 class Solution:
     def longestCommonSubsequence(self, text1:str, text2:str) -> int:
