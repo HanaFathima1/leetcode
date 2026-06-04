@@ -62,3 +62,70 @@ class NumArray:
         return self.prefix_sum[right+1]-self.prefix_sum[left]
 sol = NumArray([-2,0,3,-5,2,-1])
 print(sol.sumRange(0,2))
+
+
+
+#-----------------explanation---------------
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        
+        # Create a prefix sum array and initialize it with 0.
+        # prefix_sum[i] will store the sum of the first i elements.
+        self.prefix_sum = [0]
+
+        # Build the prefix sum array
+        for num in nums:
+            
+            # self.prefix_sum[-1] gives the last prefix sum calculated
+            # Add the current number to it and append the result
+            self.prefix_sum.append(self.prefix_sum[-1] + num)
+
+        # Example:
+        # nums = [-2, 0, 3, -5, 2, -1]
+        #
+        # prefix_sum becomes:
+        # [0, -2, -2, 1, -4, -2, -3]
+        #
+        # Meaning:
+        # prefix_sum[0] = 0
+        # prefix_sum[1] = -2
+        # prefix_sum[2] = -2      (-2 + 0)
+        # prefix_sum[3] = 1       (-2 + 0 + 3)
+        # prefix_sum[4] = -4      (-2 + 0 + 3 - 5)
+        # prefix_sum[5] = -2      (-2 + 0 + 3 - 5 + 2)
+        # prefix_sum[6] = -3      (-2 + 0 + 3 - 5 + 2 - 1)
+
+
+    def sumRange(self, left: int, right: int) -> int:
+
+        # To find the sum from index left to right:
+        #
+        # prefix_sum[right + 1]
+        # = sum of elements from index 0 to right
+        #
+        # prefix_sum[left]
+        # = sum of elements before index left
+        #
+        # Subtracting them removes the unwanted part
+        #
+        # Formula:
+        # Range Sum(left, right)
+        # = prefix_sum[right + 1] - prefix_sum[left]
+
+        return self.prefix_sum[right + 1] - self.prefix_sum[left]
+
+
+# Example
+sol = NumArray([-2, 0, 3, -5, 2, -1])
+
+# sumRange(0, 2)
+# = (-2 + 0 + 3)
+# = 1
+#
+# prefix_sum[3] - prefix_sum[0]
+# = 1 - 0
+# = 1
+
+print(sol.sumRange(0, 2))
