@@ -154,41 +154,63 @@ class Solution:
 #------------DRY RUN--------------
 """
 
-Visual Understanding
-Stack Evolution
-num = 1
+Input
+nums1 = [4,1,2]
+nums2 = [1,3,4,2]
 
-Stack:
-[1]
-num = 3
+Using your monotonic stack approach:
 
-3 > 1
+stack = []
+next_greater = {}
+Dry Run Table
+| i | num | Stack Before | Action         | Dictionary Update | Stack After |
+| - | --- | ------------ | -------------- | ----------------- | ----------- |
+| 0 | 1   | []           | Push 1         | No change         | [1]         |
+| 1 | 3   | [1]          | 3 > 1 → Pop 1  | 1 → 3             | []          |
+| 1 | 3   | []           | Push 3         | No change         | [3]         |
+| 2 | 4   | [3]          | 4 > 3 → Pop 3  | 3 → 4             | []          |
+| 2 | 4   | []           | Push 4         | No change         | [4]         |
+| 3 | 2   | [4]          | 2 < 4 → No Pop | No change         | [4]         |
+| 3 | 2   | [4]          | Push 2         | No change         | [4,2]       |
 
-Pop 1
-1 → 3
+After Loop Ends
 
-Stack:
-[3]
-num = 4
+Remaining stack:
 
-4 > 3
-
-Pop 3
-3 → 4
-
-Stack:
-[4]
-num = 2
-
-2 < 4
-
-Stack:
 [4,2]
 
-End:
+These elements have no greater element on their right.
 
-4 → -1
-2 → -1
+| Popped Element | Dictionary Update |
+| -------------- | ----------------- |
+| 2              | 2 → -1            |
+| 4              | 4 → -1            |
+
+Final Dictionary
+| Number | Next Greater |
+| ------ | ------------ |
+| 1      | 3            |
+| 3      | 4            |
+| 2      | -1           |
+| 4      | -1           |
+
+{
+    1:3,
+    3:4,
+    2:-1,
+    4:-1
+}
+Build Answer for nums1
+nums1 = [4,1,2]
+| Number | Dictionary Lookup |
+| ------ | ----------------- |
+| 4      | -1                |
+| 1      | 3                 |
+| 2      | -1                |
+
+Final Answer:
+
+[-1,3,-1]
 
 """
 
