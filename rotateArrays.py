@@ -79,26 +79,36 @@ print(sol.rotate(nums = [-1,-100,3,99], k = 2))
 ======================Dry Run======================
 nums = [1,2,3,4,5,6,7]
 k = 3
+Step 1
+n = len(nums)
+n = 7
+Step 2
+k = k % n
+k = 3 % 7 = 3
+Step 3
+
+Take the last k elements:
+
 nums[n-k:]
-
-gives
-
+nums[4:]
 [5,6,7]
 
-and
+Take the remaining elements:
 
 nums[:n-k]
-
-gives
-
+nums[:4]
 [1,2,3,4]
+Step 4
 
-Combine:
+Join both parts:
 
 [5,6,7] + [1,2,3,4]
-
-Result:
-
 [5,6,7,1,2,3,4]
+Step 5
+nums[:] = [5,6,7,1,2,3,4]
+
+Final:
+
+nums = [5,6,7,1,2,3,4]
 
 """
