@@ -79,3 +79,155 @@ class Solution:
         return w
 sol=Solution()
 print(sol.findMaximisedCapital(k = 2, w = 0, profits = [1,2,3], capital = [0,1,1]))
+
+
+#EXPLANATION OF CODE
+
+import heapq
+
+class Solution:
+
+    def findMaximisedCapital(self, k, w, profits, capital):
+        # Combine capital requirement and profit of each project
+        # Example:
+        # capital = [0,1,1]
+        # profits = [1,2,3]
+        # projects = [(0,1), (1,2), (1,3)]
+        projects = list(zip(capital, profits))
+
+        # Sort projects by capital required
+        # This allows us to efficiently find all projects
+        # that can be started with current capital 'w'
+        projects.sort()
+
+        # Python heapq is a min-heap.
+        # To simulate a max-heap, we store negative profits.
+        max_heap = []
+
+        # Pointer to traverse sorted projects
+        i = 0
+
+        # Total number of projects
+        n = len(projects)
+
+        # We can choose at most k projects
+        for _ in range(k):
+
+            # Add all projects that are currently affordable
+            # (capital required <= current capital w)
+            while i < n and projects[i][0] <= w:
+
+                # Push negative profit to create max-heap behavior
+                heapq.heappush(max_heap, -projects[i][1])
+
+                i += 1
+
+            # If no affordable projects exist, stop early
+            if not max_heap:
+                break
+
+            # Select the most profitable project available
+            # heappop returns the smallest negative value,
+            # which corresponds to the largest profit
+            w += -heapq.heappop(max_heap)
+
+        # Return final maximized capital
+        return w
+
+
+# Create object
+sol = Solution()
+
+# Example:
+# Initial capital = 0
+# Can choose at most 2 projects
+# profits = [1,2,3]
+# capital = [0,1,1]
+print(sol.findMaximisedCapital(
+    k=2,
+    w=0,
+    profits=[1, 2, 3],
+    capital=[0, 1, 1]
+))
+
+
+#DRY RUN
+"""
+Dry Run
+
+Input:
+
+k = 2
+w = 0
+profits = [1,2,3]
+capital = [0,1,1]
+
+Projects after sorting:
+
+[(0,1), (1,2), (1,3)]
+Iteration 1
+
+Current capital:
+
+w = 0
+
+Affordable projects:
+
+(0,1)
+
+Heap:
+
+[-1]
+
+Choose highest profit:
+
+profit = 1
+
+New capital:
+
+w = 0 + 1 = 1
+Iteration 2
+
+Current capital:
+
+w = 1
+
+New affordable projects:
+
+(1,2), (1,3)
+
+Heap:
+
+[-3, -2]
+
+Choose highest profit:
+
+profit = 3
+
+New capital:
+
+w = 1 + 3 = 4
+
+Loop ends (k = 2 projects chosen).
+
+Output:
+
+4
+=========================================
+Core Idea
+Sort projects by capital required.
+As your capital grows, keep adding newly affordable projects into a max heap.
+Always pick the project with the highest profit among the affordable ones.
+Repeat at most k times.
+=========================================
+Time Complexity
+Sorting projects: O(n log n)
+Each project is pushed and popped from heap at most once: O(n log n)
+Overall: O(n log n)
+=========================================
+Space Complexity
+Projects list: O(n)
+Heap: O(n)
+
+Overall space: O(n).
+"""
