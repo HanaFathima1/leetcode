@@ -36,3 +36,116 @@ class Solution:
         return right
 sol=Solution()
 print(sol.mySqrt(8))
+
+"""
+
+======dry run====
+
+Let's do a dry run for x = 8.
+
+Initial Values
+x = 8
+
+left = 1
+right = x // 2 = 4
+Dry Run Table
+| Iteration | left | right | mid = (left+right)//2 | mid*mid | Action                              |
+| --------- | ---- | ----- | --------------------- | ------- | ----------------------------------- |
+| 1         | 1    | 4     | 2                     | 4       | 4 < 8, search right half → left = 3 |
+| 2         | 3    | 4     | 3                     | 9       | 9 > 8, search left half → right = 2 |
+
+Iteration 1
+left = 1
+right = 4
+
+mid = (1 + 4) // 2
+    = 2
+
+mid * mid = 4
+
+Check:
+
+4 == 8 ? No
+4 < 8 ? Yes
+
+Move to the right side:
+
+left = mid + 1
+     = 3
+
+Now:
+
+left = 3
+right = 4
+Iteration 2
+mid = (3 + 4) // 2
+    = 3
+
+mid * mid = 9
+
+Check:
+
+9 == 8 ? No
+9 < 8 ? No
+
+So:
+
+right = mid - 1
+      = 2
+
+Now:
+
+left = 3
+right = 2
+Loop Condition
+while left <= right
+
+Check:
+
+3 <= 2 ? False
+
+Loop stops.
+
+Return Statement
+return right
+
+Current value:
+
+right = 2
+
+Output:
+
+2
+Why return right?
+
+When the loop ends:
+
+left = 3
+right = 2
+
+We know:
+
+2² = 4  ≤ 8
+3² = 9  > 8
+
+So the integer square root of 8 is:
+
+⌊√8⌋ = 2
+
+right always ends up pointing to the largest number whose square is ≤ x, so we return right.
+
+Visualization
+Numbers: 1  2  3  4
+Squares: 1  4  9 16
+
+For x = 8:
+
+4 <= 8
+9 > 8
+
+Answer = 2
+Complexity
+Time Complexity  : O(log x)
+Space Complexity : O(1)
+
+"""
