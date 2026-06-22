@@ -55,7 +55,7 @@ How many different ways can you completely fill a 2 × n rectangle using 2 × 1 
 """
 
 class Solution:
-    def numTilings(selff, n:int) -> int:
+    def numTilings(self, n:int) -> int:
         MOD = 10**9 + 7
         if n==1:
             return 1
