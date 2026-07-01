@@ -319,6 +319,4 @@ O(1) auxiliary space
 SC = O(1)
 → Only constant extra variables are used (arrows and current_end).
 """
-
-
                 
