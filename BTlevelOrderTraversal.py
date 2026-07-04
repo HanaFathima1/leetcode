@@ -61,3 +61,218 @@ root.right.right = TreeNode(7)
 
 sol = Solution()
 print(sol.levelOrder(root))
+
+
+"""
+DRY RUN
+
+
+Tree Used
+        3
+       / \
+      9   20
+         /  \
+        15   7
+Initial State
+Queue = [3]
+
+Result = []
+Iteration 1 (Level 0)
+Queue before processing
+[3]
+Calculate level size
+level_size = len(queue)
+           = 1
+
+This means only one node belongs to this level.
+
+level_nodes = []
+Process node 3
+node = queue.popleft()
+
+Queue becomes
+
+[]
+
+Add value
+
+level_nodes = [3]
+
+Add left child
+
+queue.append(9)
+
+Queue
+
+[9]
+
+Add right child
+
+queue.append(20)
+
+Queue
+
+[9, 20]
+
+Level finished.
+
+Append it.
+
+result = [[3]]
+
+Current state
+
+Queue
+
+[9,20]
+Iteration 2 (Level 1)
+
+Queue
+
+[9,20]
+
+Calculate
+
+level_size = 2
+
+Meaning
+
+This level has exactly 2 nodes.
+level_nodes = []
+Process node 9
+
+Remove
+
+Queue
+
+[20]
+
+Add value
+
+level_nodes
+
+[9]
+
+Node 9 has no children.
+
+Queue remains
+
+[20]
+Process node 20
+
+Remove
+
+Queue
+
+[]
+
+Add value
+
+level_nodes
+
+[9,20]
+
+Left child
+
+15
+
+Queue
+
+[15]
+
+Right child
+
+7
+
+Queue
+
+[15,7]
+
+Level completed.
+
+Append
+
+result
+
+[
+ [3],
+ [9,20]
+]
+
+Current queue
+
+[15,7]
+Iteration 3 (Level 2)
+
+Queue
+
+[15,7]
+level_size = 2
+level_nodes = []
+Process 15
+
+Remove
+
+Queue
+
+[7]
+
+Add value
+
+level_nodes
+
+[15]
+
+No children.
+
+Process 7
+
+Remove
+
+Queue
+
+[]
+
+Add value
+
+level_nodes
+
+[15,7]
+
+No children.
+
+Append level
+
+result
+
+[
+ [3],
+ [9,20],
+ [15,7]
+]
+
+Queue becomes empty.
+
+The loop stops.
+
+Return
+
+[
+ [3],
+ [9,20],
+ [15,7]
+]
+Dry Run Table
+| Iteration | Queue Before | level_size | Nodes Processed | Queue After | Result              |
+| --------- | ------------ | ---------- | --------------- | ----------- | ------------------- |
+| Start     | [3]          | -          | -               | [3]         | []                  |
+| 1         | [3]          | 1          | 3               | [9,20]      | [[3]]               |
+| 2         | [9,20]       | 2          | 9,20            | [15,7]      | [[3],[9,20]]        |
+| 3         | [15,7]       | 2          | 15,7            | []          | [[3],[9,20],[15,7]] |
+
+
+
+Time Complexity
+Time: O(n) — each node is enqueued and dequeued exactly once.
+Space: O(n) — in the worst case, the queue may contain all nodes of the widest level of the tree.
+"""
