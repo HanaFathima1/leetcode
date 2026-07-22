@@ -94,3 +94,180 @@ class Solution :
 sol=Solution()        
 print(sol.isValid("(({}))"))
     
+    
+"""
+s = "(({}))"
+Initial State
+stack = []
+closeToOpen = {
+    ")": "(",
+    "]": "[",
+    "}": "{"
+}
+
+We now iterate through every character in the string.
+
+Iteration 1
+Current character
+c = "("
+
+Is "(" in closeToOpen?
+
+No
+
+So execute:
+
+stack.append("(")
+
+Stack becomes
+
+["("]
+Iteration 2
+
+Current character
+
+c = "("
+
+Again, it is an opening bracket.
+
+Push into stack.
+
+stack = ["(", "("]
+Iteration 3
+
+Current character
+
+c = "{"
+
+Not a closing bracket.
+
+Push into stack.
+
+stack = ["(", "(", "{"]
+Iteration 4
+
+Current character
+
+c = "}"
+
+Now } is in closeToOpen.
+
+closeToOpen["}"]
+
+returns
+
+"{"
+
+Now check
+
+stack and stack[-1] == "{"
+
+Current stack
+
+["(", "(", "{"]
+
+Top element
+
+stack[-1] = "{"
+
+Condition becomes
+
+True and True
+
+So execute
+
+stack.pop()
+
+Stack becomes
+
+["(", "("]
+Iteration 5
+
+Current character
+
+c = ")"
+
+Lookup
+
+closeToOpen[")"]
+
+returns
+
+"("
+
+Current stack
+
+["(", "("]
+
+Top
+
+stack[-1] = "("
+
+Matches.
+
+Pop.
+
+stack = ["("]
+Iteration 6
+
+Current character
+
+c = ")"
+
+Again,
+
+closeToOpen[")"] = "("
+
+Top of stack
+
+stack[-1] = "("
+
+Matches.
+
+Pop.
+
+stack = []
+End of Loop
+
+Stack is
+
+[]
+
+Return statement
+
+return True if not stack else False
+
+Since
+
+not stack
+
+is
+
+True
+
+the function returns
+
+True
+
+Output
+
+True
+Dry Run Table
+
+| Step  | Character | Action                      | Stack             |
+| ----- | --------- | --------------------------- | ----------------- |
+| Start | -         | Initialize                  | `[]`              |
+| 1     | `(`       | Push                        | `["("]`           |
+| 2     | `(`       | Push                        | `["(", "("]`      |
+| 3     | `{`       | Push                        | `["(", "(", "{"]` |
+| 4     | `}`       | Matches `{`, Pop            | `["(", "("]`      |
+| 5     | `)`       | Matches `(`, Pop            | `["("]`           |
+| 6     | `)`       | Matches `(`, Pop            | `[]`              |
+| End   | -         | Stack empty → Return `True` | `[]`              |
+
+Time Complexity
+O(n) — each character is pushed and popped at most once.
+Space Complexity
+O(n) in the worst case (e.g., "(((([[").
+
+"""
