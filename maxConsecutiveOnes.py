@@ -57,3 +57,21 @@ class Solution:
 sol=Solution()
 print(sol.findMaxConsecutiveOnes([1,1,0,1,1,1]))
 print(sol.findMaxConsecutiveOnes([1,0,1,1,0,1]))
+
+
+# or
+
+ 
+def consecutiveOnes(nums):     
+    l,r = 0,0
+    maxlen=0
+    for r in range(len(nums)): 
+        if nums[r]==1:
+            r+=1
+            maxlen=max(maxlen,r-l)
+        else:
+            r+=1
+            l=r
+    return maxlen
+print(consecutiveOnes(nums=[1,1,0,1,1,1]))
+print(consecutiveOnes(nums=[1,0,1,1,0,1]))

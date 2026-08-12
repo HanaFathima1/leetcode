@@ -72,3 +72,149 @@ sol=Solution()
 print(sol.minEatingSpeed(piles = [3,6,7,11], h = 8))
 print(sol.minEatingSpeed(piles = [30,11,23,4,20], h = 5))
 print(sol.minEatingSpeed(piles = [30,11,23,4,20], h = 6))
+
+"""
+#explanation of the question:
+
+Suppose Koko has these banana piles:
+
+piles = [3, 6, 7, 11]
+
+And the guards will return in:
+
+h = 8 hours
+
+The question is:
+
+How fast should Koko eat so that she finishes all the bananas within 8 hours?
+
+The "speed" is measured in bananas per hour.
+
+Suppose Koko chooses a speed of 1 banana/hour
+
+Every hour she can eat only 1 banana from a single pile.
+
+To finish:
+
+Pile of 3 → 3 hours
+Pile of 6 → 6 hours
+Pile of 7 → 7 hours
+Pile of 11 → 11 hours
+
+Total:
+
+3 + 6 + 7 + 11 = 27 hours
+
+But she has only 8 hours.
+
+❌ Too slow.
+
+Suppose she chooses 2 bananas/hour
+
+Now:
+
+Pile 3 → 2 hours
+Pile 6 → 3 hours
+Pile 7 → 4 hours
+Pile 11 → 6 hours
+
+Total:
+
+2 + 3 + 4 + 6 = 15 hours
+
+Still more than 8.
+
+❌ Too slow.
+
+Suppose she chooses 4 bananas/hour
+
+Now:
+
+Pile 3 → 1 hour
+Pile 6 → 2 hours
+Pile 7 → 2 hours
+Pile 11 → 3 hours
+
+Total:
+
+1 + 2 + 2 + 3 = 8 hours
+
+Exactly 8 hours.
+
+✅ This speed works.
+
+What if she chooses 5 bananas/hour?
+Pile 3 → 1 hour
+Pile 6 → 2 hours
+Pile 7 → 2 hours
+Pile 11 → 3 hours
+
+Total:
+
+8 hours
+
+Also works.
+
+What if she chooses 10 bananas/hour?
+Pile 3 → 1 hour
+Pile 6 → 1 hour
+Pile 7 → 1 hour
+Pile 11 → 2 hours
+
+Total:
+
+5 hours
+
+Also works.
+
+So what answer does the problem want?
+
+It doesn't ask:
+
+"Can she finish?"
+
+It asks:
+
+What is the smallest eating speed that lets her finish within h hours?
+
+For this example:
+
+Speed 1 → ❌
+Speed 2 → ❌
+Speed 3 → ❌
+Speed 4 → ✅
+Speed 5 → ✅
+Speed 6 → ✅
+...
+
+The first speed that works is 4, so the answer is:
+
+4
+The most confusing rule
+
+Many people misunderstand this sentence:
+
+"Each hour, Koko chooses some pile and eats k bananas from that pile."
+
+It means:
+
+If k = 4 and a pile has only 3 bananas, she eats all 3 and stops for that hour.
+
+She cannot use the remaining capacity (1 banana) to start another pile.
+
+For example:
+
+Pile = 3
+Speed = 4
+
+She spends 1 full hour to finish that pile.
+
+Not 45 minutes.
+
+Let me ask you one question.
+
+Suppose:
+
+piles = [8]
+h = 2
+"""

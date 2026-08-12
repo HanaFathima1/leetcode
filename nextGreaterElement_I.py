@@ -228,3 +228,164 @@ O(n)
 
 for the stack and dictionary.        
 """     
+
+
+
+"""
+#===========================A COMPLETE GUIDE FOR MONOTONIC STACK PATTERN========================================
+
+A monotonic stack maintains elements in either increasing or decreasing order. There are four standard patterns you should know for interviews and LeetCode.
+
+1. Next Greater Element (NGE)
+
+Find the first greater element to the right.
+
+Example
+Input : [2,1,2,4,3]
+Output: [4,2,4,-1,-1]
+Code
+def next_greater(nums):
+    n = len(nums)
+    ans = [-1] * n
+    stack = []                  # stores indices
+
+    for i in range(n):
+        while stack and nums[i] > nums[stack[-1]]:
+            ans[stack.pop()] = nums[i]
+        stack.append(i)
+
+    return ans
+
+
+nums = [2,1,2,4,3]
+print(next_greater(nums))
+2. Next Smaller Element (NSE)
+
+Find the first smaller element to the right.
+
+Example
+Input : [4,8,5,2,25]
+Output: [2,5,2,-1,-1]
+Code
+def next_smaller(nums):
+    n = len(nums)
+    ans = [-1] * n
+    stack = []
+
+    for i in range(n):
+        while stack and nums[i] < nums[stack[-1]]:
+            ans[stack.pop()] = nums[i]
+        stack.append(i)
+
+    return ans
+
+
+nums = [4,8,5,2,25]
+print(next_smaller(nums))
+3. Previous Greater Element (PGE)
+
+Find the first greater element to the left.
+
+Example
+Input : [10,4,2,20,40,12]
+Output: [-1,10,4,-1,-1,40]
+Code
+def previous_greater(nums):
+    n = len(nums)
+    ans = [-1] * n
+    stack = []
+
+    for i in range(n):
+        while stack and stack[-1] <= nums[i]:
+            stack.pop()
+
+        if stack:
+            ans[i] = stack[-1]
+
+        stack.append(nums[i])
+
+    return ans
+
+
+nums = [10,4,2,20,40,12]
+print(previous_greater(nums))
+4. Previous Smaller Element (PSE)
+
+Find the first smaller element to the left.
+
+Example
+Input : [4,5,2,10,8]
+Output: [-1,4,-1,2,2]
+Code
+def previous_smaller(nums):
+    n = len(nums)
+    ans = [-1] * n
+    stack = []
+
+    for i in range(n):
+        while stack and stack[-1] >= nums[i]:
+            stack.pop()
+
+        if stack:
+            ans[i] = stack[-1]
+
+        stack.append(nums[i])
+
+    return ans
+
+
+nums = [4,5,2,10,8]
+print(previous_smaller(nums))
+One Cheat Sheet
+Problem	Traverse	While Condition	Stack Type
+Next Greater	Left → Right	nums[i] > nums[stack[-1]]	Decreasing
+Next Smaller	Left → Right	nums[i] < nums[stack[-1]]	Increasing
+Previous Greater	Left → Right	stack[-1] <= nums[i]	Decreasing
+Previous Smaller	Left → Right	stack[-1] >= nums[i]	Increasing
+Universal Templates
+Next Greater
+stack = []
+ans = [-1] * len(nums)
+
+for i in range(len(nums)):
+    while stack and nums[i] > nums[stack[-1]]:
+        ans[stack.pop()] = nums[i]
+    stack.append(i)
+Next Smaller
+stack = []
+ans = [-1] * len(nums)
+
+for i in range(len(nums)):
+    while stack and nums[i] < nums[stack[-1]]:
+        ans[stack.pop()] = nums[i]
+    stack.append(i)
+Previous Greater
+stack = []
+ans = [-1] * len(nums)
+
+for i in range(len(nums)):
+    while stack and stack[-1] <= nums[i]:
+        stack.pop()
+
+    if stack:
+        ans[i] = stack[-1]
+
+    stack.append(nums[i])
+Previous Smaller
+stack = []
+ans = [-1] * len(nums)
+
+for i in range(len(nums)):
+    while stack and stack[-1] >= nums[i]:
+        stack.pop()
+
+    if stack:
+        ans[i] = stack[-1]
+
+    stack.append(nums[i])
+Interview Tip
+
+A quick way to remember the patterns is:
+
+Next problems: store indices, because you're filling answers for earlier elements when you discover the next qualifying element.
+Previous problems: you can store values if you only need the previous element's value; store indices if you need positions or distances (common in problems like Largest Rectangle in Histogram or Sum of Subarray Minimums)."""
