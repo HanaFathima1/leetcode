@@ -1647,662 +1647,707 @@
 # inorder(root)
         
      
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:         
-    def maxDepth(self,root):
-        if not root:
-            return 0
-        left_tree=self.maxDepth(root.left)
-        right_tree=self.maxDepth(root.right)
-        return 1+max(left_tree,right_tree)
-root=TreeNode(3)
-root.left=TreeNode(9)
-root.right=TreeNode(20)
-root.right.left=TreeNode(15)
-root.right.right=TreeNode(6)
-root.right.right.right=TreeNode(9)
-sol=Solution()
-print(sol.maxDepth(root))
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:         
+#     def maxDepth(self,root):
+#         if not root:
+#             return 0
+#         left_tree=self.maxDepth(root.left)
+#         right_tree=self.maxDepth(root.right)
+#         return 1+max(left_tree,right_tree)
+# root=TreeNode(3)
+# root.left=TreeNode(9)
+# root.right=TreeNode(20)
+# root.right.left=TreeNode(15)
+# root.right.right=TreeNode(6)
+# root.right.right.right=TreeNode(9)
+# sol=Solution()
+# print(sol.maxDepth(root))
         
 
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:
-    def minDepth(self,root):
-        if not root:
-            return 0
-        if not root.left:
-            return 1+self.minDepth(root.right)
-        if not root.right:
-            return 1+self.minDepth(root.left)
-        return 1+min(self.minDepth(root.left),self.minDepth(root.right))
-root=TreeNode(3)
-root.left=TreeNode(9)
-root.right=TreeNode(20)
-root.right.left=TreeNode(15)
-root.right.right=TreeNode(6)
-root.right.right.right=TreeNode(6)
-sol=Solution()
-print(sol.minDepth(root))
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:
+#     def minDepth(self,root):
+#         if not root:
+#             return 0
+#         if not root.left:
+#             return 1+self.minDepth(root.right)
+#         if not root.right:
+#             return 1+self.minDepth(root.left)
+#         return 1+min(self.minDepth(root.left),self.minDepth(root.right))
+# root=TreeNode(3)
+# root.left=TreeNode(9)
+# root.right=TreeNode(20)
+# root.right.left=TreeNode(15)
+# root.right.right=TreeNode(6)
+# root.right.right.right=TreeNode(6)
+# sol=Solution()
+# print(sol.minDepth(root))
         
 
-from collections import deque
-class Solution:
-    def levelOrder(self,root):
-        if not root:
-            return None
-        res=[]
-        queue=deque([root])
-        while queue:
-            node=queue.popleft()
-            res.append(node.val)
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-        return res
-root=TreeNode(3)
-root.left=TreeNode(9)
-root.right=TreeNode(20)
-root.right.left=TreeNode(15)
-root.right.right=TreeNode(6)
-root.right.right.right=TreeNode(6)
-sol=Solution()
-print(sol.levelOrder(root))
+# from collections import deque
+# class Solution:
+#     def levelOrder(self,root):
+#         if not root:
+#             return None
+#         res=[]
+#         queue=deque([root])
+#         while queue:
+#             node=queue.popleft()
+#             res.append(node.val)
+#             if node.left:
+#                 queue.append(node.left)
+#             if node.right:
+#                 queue.append(node.right)
+#         return res
+# root=TreeNode(3)
+# root.left=TreeNode(9)
+# root.right=TreeNode(20)
+# root.right.left=TreeNode(15)
+# root.right.right=TreeNode(6)
+# root.right.right.right=TreeNode(6)
+# sol=Solution()
+# print(sol.levelOrder(root))
                 
             
  
-class Solution:
-    def diameterOfBT(self,root):
-        diameter=0
-        def dfs(node):
-            nonlocal diameter  
-            if not node:
-                return 0
-            left=dfs(node.left)
-            right=dfs(node.right)
-            diameter=max(diameter,left+right)
-            return 1+max(left,right)
-        dfs(root)
-        return diameter
-root=TreeNode(1)
-root.left=TreeNode(2)
-root.right=TreeNode(3)
-root.left.left=TreeNode(4)
-root.left.right=TreeNode(5)
-sol=Solution()
-print(sol.diameterOfBT(root))
+# class Solution:
+#     def diameterOfBT(self,root):
+#         diameter=0
+#         def dfs(node):
+#             nonlocal diameter  
+#             if not node:
+#                 return 0
+#             left=dfs(node.left)
+#             right=dfs(node.right)
+#             diameter=max(diameter,left+right)
+#             return 1+max(left,right)
+#         dfs(root)
+#         return diameter
+# root=TreeNode(1)
+# root.left=TreeNode(2)
+# root.right=TreeNode(3)
+# root.left.left=TreeNode(4)
+# root.left.right=TreeNode(5)
+# sol=Solution()
+# print(sol.diameterOfBT(root))
             
     
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:
-    def validateBST(self,root):
-        def dfs(node,low,high):
-            if not node:
-                return True
-            if not low<node.val<high:
-                return False
-            return (dfs(node.left,low,node.val) and dfs(node.right,node.val,high))
-        return dfs(root,float('-inf'),float('inf'))
-root=TreeNode(2)
-root.left=TreeNode(1)
-root.right=TreeNode(3)
-sol=Solution()
-print(sol.validateBST(root))
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:
+#     def validateBST(self,root):
+#         def dfs(node,low,high):
+#             if not node:
+#                 return True
+#             if not low<node.val<high:
+#                 return False
+#             return (dfs(node.left,low,node.val) and dfs(node.right,node.val,high))
+#         return dfs(root,float('-inf'),float('inf'))
+# root=TreeNode(2)
+# root.left=TreeNode(1)
+# root.right=TreeNode(3)
+# sol=Solution()
+# print(sol.validateBST(root))
                
                 
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:
-    def searchBST(self,root,val):
-        if not root:
-            return None
-        elif val==root.val:
-            return root
-        elif val<root.val:
-            return self.searchBST(root.left,val)
-        else:
-            return self.searchBST(root.right,val)
-root=TreeNode(4)
-root.left=TreeNode(2)
-root.right=TreeNode(7)
-root.left.left=TreeNode(1)
-root.left.right=TreeNode(3)
-sol=Solution()
-result=sol.searchBST(root,2)
-print(result.val)
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:
+#     def searchBST(self,root,val):
+#         if not root:
+#             return None
+#         elif val==root.val:
+#             return root
+#         elif val<root.val:
+#             return self.searchBST(root.left,val)
+#         else:
+#             return self.searchBST(root.right,val)
+# root=TreeNode(4)
+# root.left=TreeNode(2)
+# root.right=TreeNode(7)
+# root.left.left=TreeNode(1)
+# root.left.right=TreeNode(3)
+# sol=Solution()
+# result=sol.searchBST(root,2)
+# print(result.val)
 
 
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:
-    def lca(self,root,p,q):
-        def dfs(node):
-            if not node:
-                return None
-            if node==p or node==q:
-                return node
-            left=dfs(node.left)
-            right=dfs(node.right)
-            if left and right:
-                return node
-            return left if left  else right
-        return dfs(root)
-root=TreeNode(3)
-root.left=TreeNode(5)
-root.right=TreeNode(1)
-root.left.left=TreeNode(6)
-root.left.right=TreeNode(2)
-root.left.right.left=TreeNode(7)
-root.left.right.right=TreeNode(4)
-root.right.left=TreeNode(0)
-root.right.right=TreeNode(8)
-p=root.left
-q=root.right
-sol=Solution()
-print(sol.lca(root,p,q).val)
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:
+#     def lca(self,root,p,q):
+#         def dfs(node):
+#             if not node:
+#                 return None
+#             if node==p or node==q:
+#                 return node
+#             left=dfs(node.left)
+#             right=dfs(node.right)
+#             if left and right:
+#                 return node
+#             return left if left  else right
+#         return dfs(root)
+# root=TreeNode(3)
+# root.left=TreeNode(5)
+# root.right=TreeNode(1)
+# root.left.left=TreeNode(6)
+# root.left.right=TreeNode(2)
+# root.left.right.left=TreeNode(7)
+# root.left.right.right=TreeNode(4)
+# root.right.left=TreeNode(0)
+# root.right.right=TreeNode(8)
+# p=root.left
+# q=root.right
+# sol=Solution()
+# print(sol.lca(root,p,q).val)
 
 
 
-class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
-        self.val=val
-        self.left=left
-        self.right=right
-class Solution:
-    def lcaBST(self,root,p,q):
-        curr=root
-        while curr:
-            if p.val<curr.val and q.val<curr.val:
-                curr=curr.left
-            elif p.val>curr.val and q.val>curr.val:
-                curr=curr.right
-            else:
-                return curr
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val=val
+#         self.left=left
+#         self.right=right
+# class Solution:
+#     def lcaBST(self,root,p,q):
+#         curr=root
+#         while curr:
+#             if p.val<curr.val and q.val<curr.val:
+#                 curr=curr.left
+#             elif p.val>curr.val and q.val>curr.val:
+#                 curr=curr.right
+#             else:
+#                 return curr
             
-root1=TreeNode(6)
-root1.left=TreeNode(2)
-root1.left.left=TreeNode(0)
-root1.left.right=TreeNode(4)
-root1.left.right.left=TreeNode(3)
-root1.left.right.right=TreeNode(5)
-root1.right=TreeNode(8)
-root1.right.right=TreeNode(9)
-root1.right.left=TreeNode(7)
+# root1=TreeNode(6)
+# root1.left=TreeNode(2)
+# root1.left.left=TreeNode(0)
+# root1.left.right=TreeNode(4)
+# root1.left.right.left=TreeNode(3)
+# root1.left.right.right=TreeNode(5)
+# root1.right=TreeNode(8)
+# root1.right.right=TreeNode(9)
+# root1.right.left=TreeNode(7)
 
-# p and q MUST be TreeNode references
-p = root1.left            # node with value 2
-q = root1.left.right      # node with value 4
-sol=Solution()
-print(sol.lcaBST(root,p,q).val)
+# # p and q MUST be TreeNode references
+# p = root1.left            # node with value 2
+# q = root1.left.right      # node with value 4
+# sol=Solution()
+# print(sol.lcaBST(root,p,q).val)
             
             
             
-class Solution:
-    def pathSum(self,root,targetSum):
-        def dfs(node,remaining):
-            if not node:
-                return 0
-            if node.val==remaining:
-                return True
-            return(dfs(node.left,remaining-node.val)
-                   or
-                   (dfs(node.right,remaining-node.val)))
-        return dfs(root,targetSum)
-root1=TreeNode(5)
-root1.left=TreeNode(4)
-root1.left.left=TreeNode(11)
-root1.left.left.left=TreeNode(7)
-root1.left.left.right=TreeNode(2)
-root1.right=TreeNode(8)
-root1.right.left=TreeNode(13)
-root1.right.right=TreeNode(4)
-root1.right.right.right=TreeNode(1)
-sol=Solution()
-print(sol.pathSum(root1,targetSum=22))
+# class Solution:
+#     def pathSum(self,root,targetSum):
+#         def dfs(node,remaining):
+#             if not node:
+#                 return 0
+#             if node.val==remaining:
+#                 return True
+#             return(dfs(node.left,remaining-node.val)
+#                    or
+#                    (dfs(node.right,remaining-node.val)))
+#         return dfs(root,targetSum)
+# root1=TreeNode(5)
+# root1.left=TreeNode(4)
+# root1.left.left=TreeNode(11)
+# root1.left.left.left=TreeNode(7)
+# root1.left.left.right=TreeNode(2)
+# root1.right=TreeNode(8)
+# root1.right.left=TreeNode(13)
+# root1.right.right=TreeNode(4)
+# root1.right.right.right=TreeNode(1)
+# sol=Solution()
+# print(sol.pathSum(root1,targetSum=22))
                 
     
     
-class Solution:
-    def rightSideView(self,root):
-        if not root:
-            return None
-        queue=deque([root])
-        view=[]
-        while queue:
-            size=len(queue)
-            for i in range(size):
-                node=queue.popleft()
-                if i==size-1:
-                    view.append(node.val)
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-        return view
-root1=TreeNode(1)
-root1.left=TreeNode(2)
-root1.right=TreeNode(3)
-root1.left.right=TreeNode(5)
-root1.right.right=TreeNode(4)
-sol=Solution()
-print(sol.rightSideView(root1))
+# class Solution:
+#     def rightSideView(self,root):
+#         if not root:
+#             return None
+#         queue=deque([root])
+#         view=[]
+#         while queue:
+#             size=len(queue)
+#             for i in range(size):
+#                 node=queue.popleft()
+#                 if i==size-1:
+#                     view.append(node.val)
+#                 if node.left:
+#                     queue.append(node.left)
+#                 if node.right:
+#                     queue.append(node.right)
+#         return view
+# root1=TreeNode(1)
+# root1.left=TreeNode(2)
+# root1.right=TreeNode(3)
+# root1.left.right=TreeNode(5)
+# root1.right.right=TreeNode(4)
+# sol=Solution()
+# print(sol.rightSideView(root1))
                     
                     
 
-class Solution:
-    def averageLevels(self,root):
-        if not root:
-            return []
-        queue=deque([root])
-        res=[]
-        avg=0
-        while queue:
-            size=len(queue)
-            total=0
-            for i in range(size):
-                    node=queue.popleft()
-                    total+=node.val
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-            avg=total/size
-            res.append(avg)
-        return res
-root=TreeNode(3)
-root.left=TreeNode(9)
-root.right=TreeNode(20)
-root.right.left=TreeNode(15)
-root.right.right=TreeNode(7)
-sol=Solution()
-print(sol.averageLevels(root))
+# class Solution:
+#     def averageLevels(self,root):
+#         if not root:
+#             return []
+#         queue=deque([root])
+#         res=[]
+#         avg=0
+#         while queue:
+#             size=len(queue)
+#             total=0
+#             for i in range(size):
+#                     node=queue.popleft()
+#                     total+=node.val
+#             if node.left:
+#                 queue.append(node.left)
+#             if node.right:
+#                 queue.append(node.right)
+#             avg=total/size
+#             res.append(avg)
+#         return res
+# root=TreeNode(3)
+# root.left=TreeNode(9)
+# root.right=TreeNode(20)
+# root.right.left=TreeNode(15)
+# root.right.right=TreeNode(7)
+# sol=Solution()
+# print(sol.averageLevels(root))
             
                         
                         
 
-class Solution:
-    def largestValue(self,root):
-        if not root:
-            return None
-        res=[]
-        level=0
-        queue=deque([root])
-        while queue:
-            size=len(queue)
-            max_value=float('-inf')
-            for _ in range(size):
-                node=queue.popleft()
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-                max_value=max(max_value,node.val)
-            res.append(max_value)
-            level+=1
-        return res
-root=TreeNode(1)
-root.left=TreeNode(3)
-root.left.left=TreeNode(5)
-root.left.right=TreeNode(3)
-root.right=TreeNode(2)
-root.right.right=TreeNode(9)
-sol=Solution()
-print(sol.largestValue(root))
+# class Solution:
+#     def largestValue(self,root):
+#         if not root:
+#             return None
+#         res=[]
+#         level=0
+#         queue=deque([root])
+#         while queue:
+#             size=len(queue)
+#             max_value=float('-inf')
+#             for _ in range(size):
+#                 node=queue.popleft()
+#                 if node.left:
+#                     queue.append(node.left)
+#                 if node.right:
+#                     queue.append(node.right)
+#                 max_value=max(max_value,node.val)
+#             res.append(max_value)
+#             level+=1
+#         return res
+# root=TreeNode(1)
+# root.left=TreeNode(3)
+# root.left.left=TreeNode(5)
+# root.left.right=TreeNode(3)
+# root.right=TreeNode(2)
+# root.right.right=TreeNode(9)
+# sol=Solution()
+# print(sol.largestValue(root))
             
 
-class Solution:
-    def numberOfIslands(self,grid):
-        if not grid:
-                return 0
-        def dfs(grid,r,c):
-            row,col=len(grid),len(grid[0])
-            if r<0 or r>=row or c<0 or c>=col:
-                return 
-            if grid[r][c]=="0":
-                return 
-            grid[r][c]="0"
-            dfs(grid,r+1,c)
-            dfs(grid,r-1,c)
-            dfs(grid,r,c+1)
-            dfs(grid,r,c-1)
-        count=0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j]=="1":
-                    count+=1
-                    dfs(grid,i,j)
-        return count
-sol=Solution()
-print(sol.numberOfIslands(grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
-  ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
-]))     
-print(sol.numberOfIslands(grid = [
-  ["1","1","0","0","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]))
+# class Solution:
+#     def numberOfIslands(self,grid):
+#         if not grid:
+#                 return 0
+#         def dfs(grid,r,c):
+#             row,col=len(grid),len(grid[0])
+#             if r<0 or r>=row or c<0 or c>=col:
+#                 return 
+#             if grid[r][c]=="0":
+#                 return 
+#             grid[r][c]="0"
+#             dfs(grid,r+1,c)
+#             dfs(grid,r-1,c)
+#             dfs(grid,r,c+1)
+#             dfs(grid,r,c-1)
+#         count=0
+#         for i in range(len(grid)):
+#             for j in range(len(grid[0])):
+#                 if grid[i][j]=="1":
+#                     count+=1
+#                     dfs(grid,i,j)
+#         return count
+# sol=Solution()
+# print(sol.numberOfIslands(grid = [
+#   ["1","1","1","1","0"],
+#   ["1","1","0","1","0"],
+#   ["1","1","0","0","0"],
+#   ["0","0","0","0","0"]
+# ]))     
+# print(sol.numberOfIslands(grid = [
+#   ["1","1","0","0","0"],
+#   ["1","1","0","0","0"],
+#   ["0","0","1","0","0"],
+#   ["0","0","0","1","1"]
+# ]))
 
 
 
-class Solutiion:
-    def maxAreaIsland(self,grid):
-        if not grid: 
-            return 0
-        def dfs(grid,r,c):
-            row=len(grid)
-            col=len(grid[0])
-            if r<0 or r>=row or c<0 or c>=col or grid[r][c]==0:
-                return 0
-            grid[r][c]=0
-            return (1+dfs(grid,r+1,c)+dfs(grid,r-1,c)+dfs(grid,r,c+1)+dfs(grid,r,c-1))
-        maxArea=0
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c]==1:
-                    maxArea=max(dfs(grid,r,c),maxArea)
-        return maxArea
-sol=Solutiion()
-print(sol.maxAreaIsland(grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
-                                [0,0,0,0,0,0,0,1,1,1,0,0,0],
-                                [0,1,1,0,1,0,0,0,0,0,0,0,0],
-                                [0,1,0,0,1,1,0,0,1,0,1,0,0],
-                                [0,1,0,0,1,1,0,0,1,1,1,0,0],
-                                [0,0,0,0,0,0,0,0,0,0,1,0,0],
-                                [0,0,0,0,0,0,0,1,1,1,0,0,0],
-                                [0,0,0,0,0,0,0,1,1,0,0,0,0]]))
+# class Solutiion:
+#     def maxAreaIsland(self,grid):
+#         if not grid: 
+#             return 0
+#         def dfs(grid,r,c):
+#             row=len(grid)
+#             col=len(grid[0])
+#             if r<0 or r>=row or c<0 or c>=col or grid[r][c]==0:
+#                 return 0
+#             grid[r][c]=0
+#             return (1+dfs(grid,r+1,c)+dfs(grid,r-1,c)+dfs(grid,r,c+1)+dfs(grid,r,c-1))
+#         maxArea=0
+#         for r in range(len(grid)):
+#             for c in range(len(grid[0])):
+#                 if grid[r][c]==1:
+#                     maxArea=max(dfs(grid,r,c),maxArea)
+#         return maxArea
+# sol=Solutiion()
+# print(sol.maxAreaIsland(grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+#                                 [0,0,0,0,0,0,0,1,1,1,0,0,0],
+#                                 [0,1,1,0,1,0,0,0,0,0,0,0,0],
+#                                 [0,1,0,0,1,1,0,0,1,0,1,0,0],
+#                                 [0,1,0,0,1,1,0,0,1,1,1,0,0],
+#                                 [0,0,0,0,0,0,0,0,0,0,1,0,0],
+#                                 [0,0,0,0,0,0,0,1,1,1,0,0,0],
+#                                 [0,0,0,0,0,0,0,1,1,0,0,0,0]]))
 
 
 
                     
-class Solution:
-    def rottingOranges(self,grid):
-        rows,cols=len(grid),len(grid[0])
-        fresh=0
-        time=0
-        queue=deque()
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c]==1:
-                    fresh+=1    
-                if grid[r][c]==2:
-                    queue.append([r,c])
-        directions=[[1,0],[-1,0],[0,-1],[0,1]]
-        while queue and fresh>0:
-            for i in range(len(queue)):
-                r,c=queue.popleft()
-                for dr,dc in directions:
-                    nr,nc=r+dr,c+dc
-                    if nr<0 or nr==len(grid) or nc<0 or nc==len(grid[0]) or grid[nr][nc]!=1:
-                        continue
-                    grid[nr][nc]=2
-                    queue.append([nr,nc])
-                    fresh-=1
-            time+=1
-        return time if fresh==0 else -1
-sol=Solution()
-print(sol.rottingOranges(grid = [[2,1,1],[1,1,0],[0,1,1]]))
+# class Solution:
+#     def rottingOranges(self,grid):
+#         rows,cols=len(grid),len(grid[0])
+#         fresh=0
+#         time=0
+#         queue=deque()
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if grid[r][c]==1:
+#                     fresh+=1    
+#                 if grid[r][c]==2:
+#                     queue.append([r,c])
+#         directions=[[1,0],[-1,0],[0,-1],[0,1]]
+#         while queue and fresh>0:
+#             for i in range(len(queue)):
+#                 r,c=queue.popleft()
+#                 for dr,dc in directions:
+#                     nr,nc=r+dr,c+dc
+#                     if nr<0 or nr==len(grid) or nc<0 or nc==len(grid[0]) or grid[nr][nc]!=1:
+#                         continue
+#                     grid[nr][nc]=2
+#                     queue.append([nr,nc])
+#                     fresh-=1
+#             time+=1
+#         return time if fresh==0 else -1
+# sol=Solution()
+# print(sol.rottingOranges(grid = [[2,1,1],[1,1,0],[0,1,1]]))
 
 
 
-def ShortestBinary(grid):
-    n=len(grid)
-    if grid[0][0]==1 or grid[n-1][n-1]==1:
-        return -1
-    queue=deque()
-    queue.append((0,0,1))
-    directions=[(1,0),(-1,0),(0,-1),(0,1),(1,1),(1,-1),(-1,1),(-1,-1)]
-    while queue:
-        r,c,dist=queue.popleft()
-        if r==n-1 or c==n-1:
-            return dist
-        for dr,dc in directions:
-            nr,nc=r+dr,c+dc
-            if 0<=nr<n and 0<=nc<n and grid[nr][nc]==0 and grid[nr][nc]==0:
-                grid[nr][nc]=1
-                queue.append((nr,nc,dist+1))
-    return -1
-print(ShortestBinary(grid = [[0,1],[1,0]]))
+# def ShortestBinary(grid):
+#     n=len(grid)
+#     if grid[0][0]==1 or grid[n-1][n-1]==1:
+#         return -1
+#     queue=deque()
+#     queue.append((0,0,1))
+#     directions=[(1,0),(-1,0),(0,-1),(0,1),(1,1),(1,-1),(-1,1),(-1,-1)]
+#     while queue:
+#         r,c,dist=queue.popleft()
+#         if r==n-1 or c==n-1:
+#             return dist
+#         for dr,dc in directions:
+#             nr,nc=r+dr,c+dc
+#             if 0<=nr<n and 0<=nc<n and grid[nr][nc]==0 and grid[nr][nc]==0:
+#                 grid[nr][nc]=1
+#                 queue.append((nr,nc,dist+1))
+#     return -1
+# print(ShortestBinary(grid = [[0,1],[1,0]]))
                 
 
                 
                            
                             
-class Solution:
-    def nearestMaze(maze,entrance):
-        row,col = len(maze),len(maze[0])
-        queue = deque()
-        queue.append(entrance[0],entrance[1],0)
-        maze[entrance[0][1]]="+"
-        directions=[(-1,0),(1,0),(0,-1),(0,1)]
-        while queue:
-            row,col,steps = queue.popleft()
-            for dr,dc in directions:
-                nr,nc = row+dr, col+dc
-                if 0<=nr<row or 0<=nc<col or maze[nr][nc]==".":
-                    if nr==0 or nr==row-1 or nc==0 or nc==col-1:
-                        return steps+1
-                    maze[nr][nc]="+"
-                    queue.append((nr,nc,steps+1))
-        return -1
+# class Solution:
+#     def nearestMaze(maze,entrance):
+#         row,col = len(maze),len(maze[0])
+#         queue = deque()
+#         queue.append(entrance[0],entrance[1],0)
+#         maze[entrance[0][1]]="+"
+#         directions=[(-1,0),(1,0),(0,-1),(0,1)]
+#         while queue:
+#             row,col,steps = queue.popleft()
+#             for dr,dc in directions:
+#                 nr,nc = row+dr, col+dc
+#                 if 0<=nr<row or 0<=nc<col or maze[nr][nc]==".":
+#                     if nr==0 or nr==row-1 or nc==0 or nc==col-1:
+#                         return steps+1
+#                     maze[nr][nc]="+"
+#                     queue.append((nr,nc,steps+1))
+#         return -1
     
 
-def floofFill(image,sr,sc,color):
-    row,col=len(image),len(image[0])
-    oldColor=image[sr][sc]
-    if oldColor == color:
-        return image
-    def dfs(r,c):
-        if r<0 or r>=row or c<0 or c>=col:
-            return
-        if image[r][c]!=oldColor:
-            return
-        image[sr][sc]=color
-        dfs(r+1,c)
-        dfs(r-1,c)
-        dfs(r,c+1)
-        dfs(r,c-1)
-    dfs(sr,sc)
-    return image
+# def floofFill(image,sr,sc,color):
+#     row,col=len(image),len(image[0])
+#     oldColor=image[sr][sc]
+#     if oldColor == color:
+#         return image
+#     def dfs(r,c):
+#         if r<0 or r>=row or c<0 or c>=col:
+#             return
+#         if image[r][c]!=oldColor:
+#             return
+#         image[sr][sc]=color
+#         dfs(r+1,c)
+#         dfs(r-1,c)
+#         dfs(r,c+1)
+#         dfs(r,c-1)
+#     dfs(sr,sc)
+#     return image
 
 
-import heapq
-from collections import defaultdict
-def dijkshtra(graph,V,start):
-    dist = [float('inf')]*V
-    dist[start] = 0
-    heap = [(0,start)]
-    while heap:
-        d,u = heapq.heappop(heap)
-        if d>dist[u]:
-            continue
-        for v,weight in graph[u]:
-            if dist[u]+weight<dist[v]:
-                dist[v]=dist[u]+weight
-                heapq.heappush(heap,(dist[v],v))
-    return dist
-graph=defaultdict(list)
-graph[0]=[(1,4),(2,1)]
-graph[1]=[(3,1)]
-graph[2]=[(1,2),(3,5)]
-graph[3]=[]
-V=4
-print(dijkshtra(graph,V,0))
-
-
-
-
-import heapq
-def networkTime(time,n,k):
-    graph=defaultdict(list)
-    for u,v,w in time:
-        graph[u].append((v,w))
-    dist=[float('inf')]*(n+1)
-    dist[k]=0
-    heap=[(0,k)]
-    while heap:
-        d,node = heapq.heappop(heap)
-        if d>dist[node]:
-            continue
-        for nei,wt in graph[node]:
-            if dist[node]+wt<dist[nei]:
-                dist[nei]=dist[node]+wt
-                heapq.heappush(heap,(dist[nei],nei))
-    max_time = max(dist[1:])
-    return -1 if max_time==float('inf') else max_time
-print(networkTime(time = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2))
+# import heapq
+# from collections import defaultdict
+# def dijkshtra(graph,V,start):
+#     dist = [float('inf')]*V
+#     dist[start] = 0
+#     heap = [(0,start)]
+#     while heap:
+#         d,u = heapq.heappop(heap)
+#         if d>dist[u]:
+#             continue
+#         for v,weight in graph[u]:
+#             if dist[u]+weight<dist[v]:
+#                 dist[v]=dist[u]+weight
+#                 heapq.heappush(heap,(dist[v],v))
+#     return dist
+# graph=defaultdict(list)
+# graph[0]=[(1,4),(2,1)]
+# graph[1]=[(3,1)]
+# graph[2]=[(1,2),(3,5)]
+# graph[3]=[]
+# V=4
+# print(dijkshtra(graph,V,0))
 
 
 
-def cheapestFlght(n,flights,src,dst,k):
-    dist=[float('inf')]*n
-    dist[src]=0
-    for _ in range(k+1):
-        temp=dist.copy()
-        for u,v,price in flights:
-            if dist[u]!=float('inf') and dist[u]+price<temp[v]:
-                temp[v]=dist[u]+price
-        dist=temp
-    return -1 if dist[dst]==float('inf') else dist[dst]
-print(cheapestFlght(n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1))
+
+# import heapq
+# def networkTime(time,n,k):
+#     graph=defaultdict(list)
+#     for u,v,w in time:
+#         graph[u].append((v,w))
+#     dist=[float('inf')]*(n+1)
+#     dist[k]=0
+#     heap=[(0,k)]
+#     while heap:
+#         d,node = heapq.heappop(heap)
+#         if d>dist[node]:
+#             continue
+#         for nei,wt in graph[node]:
+#             if dist[node]+wt<dist[nei]:
+#                 dist[nei]=dist[node]+wt
+#                 heapq.heappush(heap,(dist[nei],nei))
+#     max_time = max(dist[1:])
+#     return -1 if max_time==float('inf') else max_time
+# print(networkTime(time = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2))
+
+
+
+# def cheapestFlght(n,flights,src,dst,k):
+#     dist=[float('inf')]*n
+#     dist[src]=0
+#     for _ in range(k+1):
+#         temp=dist.copy()
+#         for u,v,price in flights:
+#             if dist[u]!=float('inf') and dist[u]+price<temp[v]:
+#                 temp[v]=dist[u]+price
+#         dist=temp
+#     return -1 if dist[dst]==float('inf') else dist[dst]
+# print(cheapestFlght(n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1))
             
    
    
  
-def houseRobber(nums):
-    n = len(nums)
-    if n==1:
-        return nums[0]
-    dp=[0]*n
-    dp[0]=nums[0]
-    dp[1]=max(nums[0],nums[1])
-    for i in range(2,n):
-        dp[i]=max(nums[i]+dp[i-2],dp[i-1])
-    return dp[n-1]
-print(houseRobber(nums=[1,2,3,1]))      
-print(houseRobber(nums=[2,7,9,3,1]))        
+# def houseRobber(nums):
+#     n = len(nums)
+#     if n==1:
+#         return nums[0]
+#     dp=[0]*n
+#     dp[0]=nums[0]
+#     dp[1]=max(nums[0],nums[1])
+#     for i in range(2,n):
+#         dp[i]=max(nums[i]+dp[i-2],dp[i-1])
+#     return dp[n-1]
+# print(houseRobber(nums=[1,2,3,1]))      
+# print(houseRobber(nums=[2,7,9,3,1]))        
             
  
 
-def coinChange(coins,amount):
-    dp=[float('inf')]*(amount+1)
-    dp[0]=0
-    for i in range(1,amount+1):
-        for coin in coins:
-            if i-coin>=0:
-                dp[i]=min(dp[i],1+dp[i-coin])
-    return dp[amount] if dp[amount]!=float('inf') else -1
-print(coinChange(coins=[1,2,5],amount=11))
+# def coinChange(coins,amount):
+#     dp=[float('inf')]*(amount+1)
+#     dp[0]=0
+#     for i in range(1,amount+1):
+#         for coin in coins:
+#             if i-coin>=0:
+#                 dp[i]=min(dp[i],1+dp[i-coin])
+#     return dp[amount] if dp[amount]!=float('inf') else -1
+# print(coinChange(coins=[1,2,5],amount=11))
                     
 
 
-def uniquePaths(m,n):
-    dp=[[0]*n for _ in range(m)]
-    for i in range(m):
-        dp[0][i]=1
-    for j in range(n):
-        dp[i][0]=1
-    for i in range(1,m):
-        for j in range(1,n):
-            dp[i][j]=dp[i-1][j]+dp[i][j-1]
-    return dp[-1][-1]
-print(uniquePaths(m=3,n=4))
+# def uniquePaths(m,n):
+#     dp=[[0]*n for _ in range(m)]
+#     for i in range(m):
+#         dp[0][i]=1
+#     for j in range(n):
+#         dp[i][0]=1
+#     for i in range(1,m):
+#         for j in range(1,n):
+#             dp[i][j]=dp[i-1][j]+dp[i][j-1]
+#     return dp[-1][-1]
+# print(uniquePaths(m=3,n=4))
 
 
 
-def lcs(text1,text2):
-    m,n = len(text1),len(text2)
-    dp=[[0]*(n+1) for _ in range(m+1)]
-    for i in range(m-1,-1,-1):
-        for j in range(n-1,-1,-1):
-            if text1[i]==text2[j]:
-                dp[i][j]=1+dp[i+1][j+1]
-            else:
-                dp[i][j]=max(dp[i+1][j],dp[i][j+1])
-    return dp[0][0]
-print(lcs(text1="ace",text2="abhce"))
+# def lcs(text1,text2):
+#     m,n = len(text1),len(text2)
+#     dp=[[0]*(n+1) for _ in range(m+1)]
+#     for i in range(m-1,-1,-1):
+#         for j in range(n-1,-1,-1):
+#             if text1[i]==text2[j]:
+#                 dp[i][j]=1+dp[i+1][j+1]
+#             else:
+#                 dp[i][j]=max(dp[i+1][j],dp[i][j+1])
+#     return dp[0][0]
+# print(lcs(text1="ace",text2="abhce"))
                 
                 
 
 
-def editDistance(word1,word2):
-    m,n = len(word1),len(word2)
-    dp=[[0]*(n+1) for _ in range(m+1)]
-    for j in range(n+1):
-        dp[m][j]=n-j
-    for i in range(m+1):
-        dp[i][n]=m-i
-    for i in range(m-1,-1,-1):
-        for j in range(n-1,-1,-1):
-            if word1[i]==word2[j]:
-                dp[i][j]=dp[i+1][j+1]
-            else:
-                dp[i][j]=1+min(dp[i+1][j],dp[i][j+1],dp[i+1][j+1])
-    return dp[0][0]
-print(editDistance(word1 = "horse", word2 = "ros"))
+# def editDistance(word1,word2):
+#     m,n = len(word1),len(word2)
+#     dp=[[0]*(n+1) for _ in range(m+1)]
+#     for j in range(n+1):
+#         dp[m][j]=n-j
+#     for i in range(m+1):
+#         dp[i][n]=m-i
+#     for i in range(m-1,-1,-1):
+#         for j in range(n-1,-1,-1):
+#             if word1[i]==word2[j]:
+#                 dp[i][j]=dp[i+1][j+1]
+#             else:
+#                 dp[i][j]=1+min(dp[i+1][j],dp[i][j+1],dp[i+1][j+1])
+#     return dp[0][0]
+# print(editDistance(word1 = "horse", word2 = "ros"))
             
             
             
-def lis(nums):
-    n=len(nums)
-    dp=[1]*n
-    for i in range(n):
-        for j in range(i):
-            if nums[j]<nums[i]:
-                dp[i]=max(dp[i],dp[j]+1)
-    return max(dp)
-print(lis(nums=[10,9,2,5,3,7,101,18]))
+# def lis(nums):
+#     n=len(nums)
+#     dp=[1]*n
+#     for i in range(n):
+#         for j in range(i):
+#             if nums[j]<nums[i]:
+#                 dp[i]=max(dp[i],dp[j]+1)
+#     return max(dp)
+# print(lis(nums=[10,9,2,5,3,7,101,18]))
 
 
 
-def jumpGame(nums):
-    farthest=0
-    for i in range(len(nums)):
-        if i>farthest:
-            return False
+# def jumpGame(nums):
+#     farthest=0
+#     for i in range(len(nums)):
+#         if i>farthest:
+#             return False
+#         else:
+#             farthest=max(farthest,i+nums[i])
+#     return True
+# print(jumpGame(nums=[2,3,1,1,4]))
+
+
+
+# def overlappingIntervals(intervals):
+#     if not intervals:
+#         return 0
+#     intervals.sort(key=lambda x:x[1])
+#     end=intervals[0][1]
+#     remove=0
+#     for s,e in intervals[1:]:
+#         if s<end:
+#             remove+=1
+#         else:
+#             end=e
+#     return remove
+# print(overlappingIntervals([[1,2],[1,3],[2,3]]))
+
+
+
+def romanToInt(s):
+    res=0
+    roman={
+        "I":1,
+        "V":5,
+        "X":10,
+        "L":50,
+        "C":100,
+        "D":500,
+        "M":1000
+    }
+    for i in range(len(s)):
+        if i<len(s)-1 and roman[s[i]]<roman[s[i+1]]:
+            res-=roman[s[i]]
         else:
-            farthest=max(farthest,i+nums[i])
-    return True
-print(jumpGame(nums=[2,3,1,1,4]))
+            res+=roman[s[i]]
+    return res
+print(romanToInt("MCMXCIV"))
 
 
 
-def overlappingIntervals(intervals):
-    if not intervals:
-        return 0
-    intervals.sort(key=lambda x:x[1])
-    end=intervals[0][1]
-    remove=0
-    for s,e in intervals[1:]:
-        if s<end:
-            remove+=1
-        else:
-            end=e
-    return remove
-print(overlappingIntervals([[1,2],[1,3],[2,3]]))
-
-
-
-
-            
+def integerToRoman(num):
+    res=""
+    roman_map=[
+        (1000,"M"),
+        (900,"CM"),
+        (500,"D"),
+        (400,"CD"),
+        (100,"C"),
+        (90,"XC"),
+        (50,"L"),
+        (40,"XL"),
+        (10,"X"),
+        (9,"IX"),
+        (5,"V"),
+        (4,"IV"),
+        (1,"I")
+    ] 
+    for digit,symbol in roman_map:
+        while num>=digit:
+            res+=symbol
+            num-=digit
+    return res
+print(integerToRoman(1994))
+                   
+        
+        

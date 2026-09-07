@@ -103,4 +103,36 @@ pos = 1
 head = create_linked_list_with_cycle(values, pos)
 sol = Solution()
 print(sol.hasCycle(head))
+
+
+"""
+
+What does pos mean?
+
+Suppose the input is represented as:
+
+head = [3,2,0,-4]
+pos = 1
+
+pos = 1 means:
+
+The last node (-4) points back to the node at index 1, which contains 2.
+
+So the actual linked list is:
+
+3 → 2 → 0 → -4
+    ↑         ↓
+    └─────────┘
+
+Indexes are:
+
+index:  0   1   2   3
+        ↓   ↓   ↓   ↓
+       [3] [2] [0] [-4]
+            ↑       |
+            └───────┘
+
+pos = 1 tells LeetCode how the test linked list is constructed.
+
+"""
         

@@ -119,5 +119,138 @@ print(sol.romanToInt("III"))
 print(sol.romanToInt("MCMXCIV"))  
         
             
+"""
 
-    
+DRY RUN
+
+Dry Run 1 : "III"
+Initial Values
+s = "III"
+length = 3
+total = 0
+
+| i | s[i] | Next Character    | Condition (`current < next`) | Operation | total |
+| - | ---- | ----------------- | ---------------------------- | --------- | ----: |
+| 0 | I    | I                 | 1 < 1 ❌ False                | +1        |     1 |
+| 1 | I    | I                 | 1 < 1 ❌ False                | +1        |     2 |
+| 2 | I    | No next character | Else                         | +1        |     3 |
+
+Final Answer
+3
+
+
+Dry Run 2 : "MCMXCIV"
+
+Roman Number:
+
+M  C  M  X  C  I  V
+1000 100 1000 10 100 1 5
+Initial Values
+total = 0
+length = 7
+Iteration 1
+i = 0
+Current = M = 1000
+Next = C = 100
+
+Check
+
+1000 < 100 ?
+
+No.
+
+total += 1000
+total = 1000
+Iteration 2
+i = 1
+Current = C =100
+Next = M =1000
+
+Check
+
+100 < 1000 ?
+
+Yes.
+
+So subtract.
+
+total = 1000 -100
+      =900
+Iteration 3
+i =2
+Current = M =1000
+Next = X =10
+
+Check
+
+1000 <10 ?
+
+No.
+
+total =900+1000
+      =1900
+Iteration 4
+i =3
+Current = X =10
+Next = C =100
+
+Check
+
+10 <100 ?
+
+Yes.
+
+total =1900-10
+      =1890
+Iteration 5
+i =4
+Current = C =100
+Next = I =1
+
+Check
+
+100 <1 ?
+
+No.
+
+total =1890+100
+      =1990
+Iteration 6
+i =5
+Current = I =1
+Next = V =5
+
+Check
+
+1 <5 ?
+
+Yes.
+
+total =1990-1
+      =1989
+Iteration 7
+i =6
+Current = V =5
+No next character
+
+So else block executes.
+
+total =1989+5
+      =1994
+Final Table
+| i | Current | Value | Next | Value | Action | Total |
+| - | ------- | ----: | ---- | ----: | ------ | ----: |
+| 0 | M       |  1000 | C    |   100 | +1000  |  1000 |
+| 1 | C       |   100 | M    |  1000 | -100   |   900 |
+| 2 | M       |  1000 | X    |    10 | +1000  |  1900 |
+| 3 | X       |    10 | C    |   100 | -10    |  1890 |
+| 4 | C       |   100 | I    |     1 | +100   |  1990 |
+| 5 | I       |     1 | V    |     5 | -1     |  1989 |
+| 6 | V       |     5 | -    |     - | +5     |  1994 |
+
+
+Final Answer:
+
+1994
+
+"""
