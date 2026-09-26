@@ -40,6 +40,8 @@ Acceptance Rate
 
 """
 
+#LINK TO CHATGPT:https://chatgpt.com/share/6aa80c5a-2b3c-83ee-a616-65de416b0a3f
+
 #brute force
 from collections import Counter
 def characterReplacement(s,k):
