@@ -76,3 +76,111 @@ class Solution:
 sol = Solution()
 print(sol.matrixReshape([[1,2],[3,4]],1,4))
 print(sol.matrixReshape([[1,2],[3,4]],2,4))
+
+
+
+#=======code explanation==========
+def reshapeMatrix(mat, r, c):
+
+    # Original matrix dimensions
+    m, n = len(mat), len(mat[0])
+
+    # If total number of elements is different,
+    # reshaping is impossible
+    if m * n != r * c:
+        return mat
+
+    # Create the new matrix
+    res = [[0] * c for _ in range(r)]
+
+    # Linear index
+    k = 0
+
+    # Traverse every element of the ORIGINAL matrix
+    for row in range(m):
+        for col in range(n):
+
+            # k // c → row of NEW matrix
+            # k % c  → column of NEW matrix
+            res[k // c][k % c] = mat[row][col]
+
+            # Move to the next element
+            k += 1
+
+    return res
+
+"""
+why do // and % give us row and column?
+
+This is the most important concept.
+
+Suppose the new matrix has 4 columns:
+
+       columns
+       0  1  2  3
+row 0  _  _  _  _
+row 1  _  _  _  _
+row 2  _  _  _  _
+
+Imagine k moving through the matrix:
+
+k = 0 → [0][0]
+k = 1 → [0][1]
+k = 2 → [0][2]
+k = 3 → [0][3]
+
+k = 4 → [1][0]
+k = 5 → [1][1]
+k = 6 → [1][2]
+k = 7 → [1][3]
+
+k = 8 → [2][0]
+...
+
+Look at k // 4:
+
+k       k // 4
+
+0       0
+1       0
+2       0
+3       0
+
+4       1
+5       1
+6       1
+7       1
+
+8       2
+9       2
+10      2
+11      2
+
+That's exactly the row number.
+
+Now look at k % 4:
+
+k       k % 4
+
+0       0
+1       1
+2       2
+3       3
+
+4       0
+5       1
+6       2
+7       3
+
+8       0
+9       1
+10      2
+11      3
+
+That's exactly the column number.
+
+Therefore:
+
+row = k // number_of_columns
+col = k % number_of_columns
+"""
