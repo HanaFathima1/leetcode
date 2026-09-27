@@ -135,4 +135,49 @@ index:  0   1   2   3
 pos = 1 tells LeetCode how the test linked list is constructed.
 
 """
+
+
+#or another solution
+
+#141. Linked List Cycle
+class LinkedList:
+    def __init__(self,val=0,next=None):
+        self.val=val
+        self.next=next
+def linkedlistCycle(head):
+    pos=head
+    tail=head
+    while tail and tail.next:
+        pos=pos.next
+        tail=tail.next.next
+        if pos==tail:
+            return True
+    return False
+def create_cycle(values,pos):
+    if not values:
+        return None
+    nodes=[]
+    for val in values:
+        nodes.append(LinkedList(val))
+    for i in range(len(nodes)-1):
+        nodes[i].next=nodes[i+1]
+    if pos!=-1:
+        nodes[-1].next=nodes[pos]
+    return nodes[0]
+values=[1,2,3,4,5]
+pos=1
+head=create_cycle(values,pos)
+cycle=linkedlistCycle(head)
+print(cycle)
+
+
+      
+                
+
+
+
+            
+
+                
+                
         
