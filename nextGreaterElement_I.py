@@ -79,7 +79,7 @@ Find the first number that is greater than it.
 If such a number exists, return it.
 Otherwise, return -1.
 """
- 
+#Complete guide for monotonic stack: https://leetcode.com/discuss/post/2347639/a-comprehensive-guide-and-template-for-m-irii/
 class MonotonicStack:
     def nextGreaterElement(self, nums1, nums2):
         n = len(nums2)
